@@ -7,6 +7,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    var selectedAnnotation: MKAnnotation?
+    
     override func viewDidLoad() {
         loadAnnotations { annotations in
             for annotation in annotations {
@@ -24,7 +26,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
+            selectedAnnotation = view.annotation
             performSegue(withIdentifier: "showLandmark", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showLandmark" {
+            guard let landmarkViewController = segue.destination as? LandmarkViewController else { return }
+            landmarkViewController.name = selectedAnnotation?.title ?? "unknown"
         }
     }
 
