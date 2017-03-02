@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="137.18140929535232"/>
         </scene>
-        <!--View Controller-->
+        <!--Landmark View Controller-->
         <scene sceneID="664-Ok-BBa">
             <objects>
-                <viewController id="7Nh-yB-tYZ" sceneMemberID="viewController">
+                <viewController id="7Nh-yB-tYZ" customClass="LandmarkViewController" customModule="GrandTour" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YKv-Ni-8LI"/>
                         <viewControllerLayoutGuide type="bottom" id="cpI-bp-CKn"/>
