@@ -11,11 +11,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         loadAnnotations { annotations in
-            for annotation in annotations {
-                self.mapView.addAnnotation(annotation)
-            }
-            if let center = annotations.first?.coordinate {
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                for annotation in annotations {
+                    self.mapView.addAnnotation(annotation)
+                }
+                if let center = annotations.first?.coordinate {
                     self.mapView.centerCoordinate = center
                 }
             }
@@ -28,7 +28,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         annotationView.rightCalloutAccessoryView = UIButton(type: .infoDark)
         return annotationView
     }
-
+    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             selectedAnnotation = view.annotation
@@ -42,7 +42,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             landmarkViewController.name = selectedAnnotation?.title ?? "unknown"
         }
     }
-
+    
     func makeAnnotation(name: String, coordinate: CLLocationCoordinate2D) -> MKAnnotation {
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
