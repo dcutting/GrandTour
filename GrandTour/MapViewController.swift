@@ -14,6 +14,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             for annotation in annotations {
                 self.mapView.addAnnotation(annotation)
             }
+            if let center = annotations.first?.coordinate {
+                DispatchQueue.main.async {
+                    self.mapView.centerCoordinate = center
+                }
+            }
         }
     }
     
