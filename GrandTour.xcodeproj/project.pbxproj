@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C813529D1E68C4DA00702F9F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C813529C1E68C4DA00702F9F /* MapKit.framework */; };
 		C830EF751E61BF3600200D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C830EF741E61BF3600200D29 /* AppDelegate.swift */; };
 		C830EF771E61BF3600200D29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C830EF761E61BF3600200D29 /* ViewController.swift */; };
 		C830EF7A1E61BF3600200D29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C830EF781E61BF3600200D29 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C813529C1E68C4DA00702F9F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C830EF711E61BF3600200D29 /* GrandTour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrandTour.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C830EF741E61BF3600200D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C830EF761E61BF3600200D29 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +31,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C813529D1E68C4DA00702F9F /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C813529B1E68C4DA00702F9F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C813529C1E68C4DA00702F9F /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C830EF681E61BF3600200D29 = {
 			isa = PBXGroup;
 			children = (
 				C830EF731E61BF3600200D29 /* GrandTour */,
 				C830EF721E61BF3600200D29 /* Products */,
+				C813529B1E68C4DA00702F9F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,6 +110,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = J6LY6992AF;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
