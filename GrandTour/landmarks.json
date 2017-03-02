@@ -1,0 +1,16 @@
+[
+   {
+      "name":"London",
+      "coordinate": {
+         "latitude":51.5,
+         "longitude":-0.1
+      }
+   },
+   {
+      "name":"Venice",
+      "coordinate": {
+         "latitude":45.4,
+         "longitude":12.3
+      }
+   }
+]
