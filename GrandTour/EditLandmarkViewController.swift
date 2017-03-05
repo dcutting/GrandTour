@@ -2,9 +2,15 @@
 
 import UIKit
 
+protocol EditLandmarkViewControllerDelegate: class {
+    func didCompleteEditing()
+}
+
 class EditLandmarkViewController: UIViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
+    
+    weak var delegate: EditLandmarkViewControllerDelegate?
     
     var name: String?
     
@@ -13,6 +19,6 @@ class EditLandmarkViewController: UIViewController {
     }
     
     @IBAction func didTapDone(_ sender: Any) {
-        self.dismiss(animated: true)
+        delegate?.didCompleteEditing()
     }
 }

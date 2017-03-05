@@ -3,7 +3,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, EditLandmarkViewControllerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -40,6 +40,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if segue.identifier == "showLandmark" {
             guard let landmarkViewController = segue.destination as? LandmarkViewController else { return }
             landmarkViewController.name = selectedAnnotation?.title ?? "unknown"
+        } else if segue.identifier == "editLandmark" {
+            guard let editLandmarkViewController = segue.destination as? EditLandmarkViewController else { return }
+            editLandmarkViewController.delegate = self
         }
     }
     
@@ -97,5 +100,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
         task.resume()
+    }
+    
+    func didCompleteEditing() {
+        dismiss(animated: true)
     }
 }
