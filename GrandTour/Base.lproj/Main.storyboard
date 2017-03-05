@@ -93,10 +93,10 @@
             </objects>
             <point key="canvasLocation" x="1073" y="-242"/>
         </scene>
-        <!--Edit Landmark View Controller-->
+        <!--Landmark Editor View Controller-->
         <scene sceneID="pS7-mR-vnf">
             <objects>
-                <viewController id="V88-Rk-iqq" customClass="EditLandmarkViewController" customModule="GrandTour" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="V88-Rk-iqq" customClass="LandmarkEditorViewController" customModule="GrandTour" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ssK-gf-Vnd"/>
                         <viewControllerLayoutGuide type="bottom" id="45c-hg-T6l"/>
