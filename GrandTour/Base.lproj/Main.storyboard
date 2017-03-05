@@ -24,7 +24,7 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LL7-du-y1Y">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="lme-DA-4rJ"/>
                                 </connections>
@@ -46,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="137.18140929535232"/>
+            <point key="canvasLocation" x="136.71875" y="137.109375"/>
         </scene>
         <!--Landmark View Controller-->
         <scene sceneID="664-Ok-BBa">
@@ -71,9 +71,8 @@
                                     <action selector="didTapDone:" destination="7Nh-yB-tYZ" eventType="touchUpInside" id="TZT-dM-JOS"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeD-G6-G7f">
-                                <rect key="frame" x="16" y="61" width="343" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeD-G6-G7f">
+                                <rect key="frame" x="20" y="61" width="335" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -82,7 +81,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="TMN-BG-CmE" firstAttribute="top" secondItem="YKv-Ni-8LI" secondAttribute="bottom" constant="3" id="0iE-5K-8xO"/>
+                            <constraint firstItem="YeD-G6-G7f" firstAttribute="top" secondItem="TMN-BG-CmE" secondAttribute="bottom" constant="8" id="Jo8-zE-6kc"/>
+                            <constraint firstAttribute="trailing" secondItem="YeD-G6-G7f" secondAttribute="trailing" constant="20" symbolic="YES" id="Nj9-mM-ejU"/>
                             <constraint firstItem="TMN-BG-CmE" firstAttribute="leading" secondItem="ht1-wW-ngN" secondAttribute="leadingMargin" id="Uan-Tq-fSb"/>
+                            <constraint firstItem="YeD-G6-G7f" firstAttribute="leading" secondItem="ht1-wW-ngN" secondAttribute="leading" constant="20" symbolic="YES" id="qC3-IW-WoW"/>
                         </constraints>
                     </view>
                     <connections>
@@ -91,7 +93,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXR-LB-2dU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1073" y="-242"/>
+            <point key="canvasLocation" x="1072.65625" y="-242.57812499999997"/>
         </scene>
         <!--Landmark Editor View Controller-->
         <scene sceneID="pS7-mR-vnf">
@@ -118,9 +120,8 @@
                                     <action selector="didTapDone:" destination="V88-Rk-iqq" eventType="touchUpInside" id="D70-Cc-013"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SaR-De-Qka">
-                                <rect key="frame" x="16" y="58" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SaR-De-Qka">
+                                <rect key="frame" x="20" y="58" width="335" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -128,7 +129,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="SaR-De-Qka" secondAttribute="trailing" constant="20" symbolic="YES" id="Jla-Tt-umm"/>
                             <constraint firstItem="gMp-fN-Aiz" firstAttribute="top" secondItem="ssK-gf-Vnd" secondAttribute="bottom" id="Nrm-Lo-SYn"/>
+                            <constraint firstItem="SaR-De-Qka" firstAttribute="top" secondItem="gMp-fN-Aiz" secondAttribute="bottom" constant="8" id="ZfA-gB-u7U"/>
+                            <constraint firstItem="SaR-De-Qka" firstAttribute="leading" secondItem="eyK-19-YSE" secondAttribute="leading" constant="20" symbolic="YES" id="vt8-WF-igG"/>
                             <constraint firstItem="gMp-fN-Aiz" firstAttribute="leading" secondItem="eyK-19-YSE" secondAttribute="leadingMargin" id="zr1-LQ-06J"/>
                         </constraints>
                     </view>
