@@ -9,16 +9,26 @@ protocol LandmarkCreatorViewControllerDelegate: class {
 class LandmarkCreatorViewController: UIViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var doneButton: UIButton!
     
     weak var delegate: LandmarkCreatorViewControllerDelegate?
 
     var presenter = LandmarkCreatorPresenter()
-    var viewData: LandmarkCreatorViewData?
+    var viewData: LandmarkCreatorViewData? {
+        didSet {
+            updateViews()
+        }
+    }
     
+    private func updateViews() {
+        doneButton.isEnabled = viewData?.isValid ?? false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.presentableView = self
         nameTextField.addTarget(self, action: #selector(textChanged), for: .editingChanged)
+        updateViews()
     }
     
     @IBAction func tappedDone(_ sender: Any) {
@@ -28,7 +38,7 @@ class LandmarkCreatorViewController: UIViewController {
         delegate?.createdLocation(named: viewData.name)
     }
     
-    func textChanged() {
+    @objc private func textChanged() {
         guard let text = nameTextField.text else { return }
         presenter.updateName(text)
     }
