@@ -3,7 +3,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate, LandmarkEditorViewControllerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -40,9 +40,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, LandmarkEditorView
         if segue.identifier == "showLandmark" {
             guard let landmarkViewController = segue.destination as? LandmarkViewController else { return }
             landmarkViewController.name = selectedAnnotation?.title ?? "unknown"
-        } else if segue.identifier == "editLandmark" {
-            guard let editLandmarkViewController = segue.destination as? LandmarkEditorViewController else { return }
-            editLandmarkViewController.delegate = self
+        } else if segue.identifier == "createLandmark" {
+            guard let landmarkCreatorViewController = segue.destination as? LandmarkCreatorViewController else { return }
+            landmarkCreatorViewController.delegate = self
         }
     }
     
@@ -101,13 +101,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, LandmarkEditorView
         }
         task.resume()
     }
-    
-    func didCompleteEditing(landmarkEditorViewController: LandmarkEditorViewController) {
-        dismiss(animated: true)
+}
 
-        guard let name = landmarkEditorViewController.nameTextField.text, !name.isEmpty else {
-            return
-        }
+extension MapViewController: LandmarkCreatorViewControllerDelegate {
+
+    func createdLocation(named name: String) {
+
+        guard !name.isEmpty else { return }
         
         let center = mapView.centerCoordinate
         let annotation = makeAnnotation(name: name, coordinate: center)
