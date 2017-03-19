@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C8020B721E7EC4AE0098FC93 /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8020B711E7EC4AE0098FC93 /* MapPresenter.swift */; };
 		C813529D1E68C4DA00702F9F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C813529C1E68C4DA00702F9F /* MapKit.framework */; };
 		C81352A11E68CB1200702F9F /* landmarks.json in Resources */ = {isa = PBXBuildFile; fileRef = C81352A01E68CB1200702F9F /* landmarks.json */; };
 		C81352A51E68D82A00702F9F /* LandmarkCreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81352A41E68D82A00702F9F /* LandmarkCreatorViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C8020B711E7EC4AE0098FC93 /* MapPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
 		C813529C1E68C4DA00702F9F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C81352A01E68CB1200702F9F /* landmarks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = landmarks.json; sourceTree = "<group>"; };
 		C81352A41E68D82A00702F9F /* LandmarkCreatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkCreatorViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			children = (
 				C830EF741E61BF3600200D29 /* AppDelegate.swift */,
 				C830EF761E61BF3600200D29 /* MapViewController.swift */,
+				C8020B711E7EC4AE0098FC93 /* MapPresenter.swift */,
 				C81352A41E68D82A00702F9F /* LandmarkCreatorViewController.swift */,
 				C830EF781E61BF3600200D29 /* Main.storyboard */,
 				C830EF7B1E61BF3600200D29 /* Assets.xcassets */,
@@ -164,6 +167,7 @@
 				C81352A51E68D82A00702F9F /* LandmarkCreatorViewController.swift in Sources */,
 				C830EF771E61BF3600200D29 /* MapViewController.swift in Sources */,
 				C830EF751E61BF3600200D29 /* AppDelegate.swift in Sources */,
+				C8020B721E7EC4AE0098FC93 /* MapPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

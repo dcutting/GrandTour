@@ -7,17 +7,11 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    let presenter = MapPresenter()
+    
     override func viewDidLoad() {
-        loadAnnotations { annotations in
-            DispatchQueue.main.async {
-                for annotation in annotations {
-                    self.mapView.addAnnotation(annotation)
-                }
-                if let center = annotations.first?.coordinate {
-                    self.mapView.centerCoordinate = center
-                }
-            }
-        }
+        self.presenter.mapView = self
+        self.presenter.displayLocations()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -26,61 +20,18 @@ class MapViewController: UIViewController {
             landmarkCreatorViewController.delegate = self
         }
     }
-    
-    private func loadAnnotations(completion: @escaping ([MKAnnotation]) -> Void) {
-        guard let url = Bundle.main.url(forResource: "landmarks", withExtension: "json") else {
-            completion([])
-            return
-        }
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data else {
-                completion([])
-                return
-            }
-            do {
-                guard let jsonLandmarks = try JSONSerialization.jsonObject(with: data) as? [Any] else {
-                    completion([])
-                    return
-                }
-                var annotations: [MKAnnotation] = []
-                for jsonLandmark in jsonLandmarks {
-                    guard let jsonLandmark = jsonLandmark as? [String: Any] else {
-                        completion([])
-                        return
-                    }
-                    guard let name = jsonLandmark["name"] as? String else {
-                        completion([])
-                        return
-                    }
-                    guard let jsonCoordinate = jsonLandmark["coordinate"] as? [String: Double] else {
-                        completion([])
-                        return
-                    }
-                    guard let latitude = jsonCoordinate["latitude"] else {
-                        completion([])
-                        return
-                    }
-                    guard let longitude = jsonCoordinate["longitude"] else {
-                        completion([])
-                        return
-                    }
-                    let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                    let annotation = self.makeAnnotation(name: name, coordinate: coordinate)
-                    annotations.append(annotation)
-                }
-                completion(annotations)
-            } catch {
-                completion([])
-            }
-        }
-        task.resume()
-    }
+}
 
-    fileprivate func makeAnnotation(name: String, coordinate: CLLocationCoordinate2D) -> MKAnnotation {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = name
-        return annotation
+extension MapViewController: MapView {
+    
+    func setLocations(_ locations: [MapLocation]) {
+        // TODO
+        print("setting locations")
+    }
+    
+    func setCenter(coordinate: MapCoordinate) {
+        // TODO
+        print("setting center")
     }
 }
 
@@ -98,7 +49,7 @@ extension MapViewController: LandmarkCreatorViewControllerDelegate {
     func createdLocation(named name: String) {
         guard !name.isEmpty else { return }
         let center = self.mapView.centerCoordinate
-        let annotation = makeAnnotation(name: name, coordinate: center)
-        self.mapView.addAnnotation(annotation)
+        let coordinate = MapCoordinate(latitude: center.latitude, longitude: center.longitude)
+        self.presenter.createLocation(named: name, coordinate: coordinate)
     }
 }
