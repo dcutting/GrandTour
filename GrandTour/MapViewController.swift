@@ -25,13 +25,29 @@ class MapViewController: UIViewController {
 extension MapViewController: MapView {
     
     func setLocations(_ locations: [MapLocation]) {
-        // TODO
-        print("setting locations")
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        let updatedAnnotations = locations.map { location in
+            makeAnnotation(from: location)
+        }
+        self.mapView.addAnnotations(updatedAnnotations)
+    }
+    
+    private func makeAnnotation(from location: MapLocation) -> MKAnnotation {
+        let annotation = MKPointAnnotation()
+        annotation.title = location.name
+        annotation.coordinate = makeLocationCoordinate2D(from: location.coordinate)
+        return annotation
+    }
+    
+    private func makeLocationCoordinate2D(from coordinate: MapCoordinate) -> CLLocationCoordinate2D {
+        let latitude = coordinate.latitude
+        let longitude = coordinate.longitude
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
     func setCenter(coordinate: MapCoordinate) {
-        // TODO
-        print("setting center")
+        let center = makeLocationCoordinate2D(from: coordinate)
+        self.mapView.centerCoordinate = center
     }
 }
 
