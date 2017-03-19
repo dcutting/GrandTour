@@ -12,14 +12,14 @@ struct MapLocation {
     let coordinate: MapCoordinate
 }
 
-protocol MapView: class {
+protocol MapPresentableView: class {
     func setLocations(_ locations: [MapLocation])
     func setCenter(coordinate: MapCoordinate)
 }
 
 class MapPresenter {
     
-    weak var mapView: MapView?
+    weak var presentableView: MapPresentableView?
     
     private var locations = [MapLocation]()
     
@@ -34,12 +34,12 @@ class MapPresenter {
     }
     
     private func presentLocations() {
-        self.mapView?.setLocations(self.locations)
+        self.presentableView?.setLocations(self.locations)
     }
     
     private func presentCenter() {
         if let center = self.locations.first?.coordinate {
-            self.mapView?.setCenter(coordinate: center)
+            self.presentableView?.setCenter(coordinate: center)
         }
     }
     

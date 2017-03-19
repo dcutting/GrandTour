@@ -10,7 +10,7 @@ class MapViewController: UIViewController {
     let presenter = MapPresenter()
     
     override func viewDidLoad() {
-        self.presenter.mapView = self
+        self.presenter.presentableView = self
         self.presenter.displayLocations()
     }
 
@@ -22,7 +22,7 @@ class MapViewController: UIViewController {
     }
 }
 
-extension MapViewController: MapView {
+extension MapViewController: MapPresentableView {
     
     func setLocations(_ locations: [MapLocation]) {
         self.mapView.removeAnnotations(self.mapView.annotations)
