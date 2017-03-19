@@ -69,7 +69,7 @@
                                 </constraints>
                                 <state key="normal" title="Done"/>
                                 <connections>
-                                    <action selector="didTapDone:" destination="V88-Rk-iqq" eventType="touchUpInside" id="D70-Cc-013"/>
+                                    <action selector="tappedDone:" destination="V88-Rk-iqq" eventType="touchUpInside" id="e0P-GY-Rp2"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SaR-De-Qka">
