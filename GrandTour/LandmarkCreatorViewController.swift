@@ -16,11 +16,11 @@ class LandmarkCreatorViewController: UIViewController {
     var presenter = LandmarkCreatorPresenter()
     var viewData: LandmarkCreatorViewData? {
         didSet {
-            updateViews()
+            updateDoneButton()
         }
     }
     
-    private func updateViews() {
+    private func updateDoneButton() {
         doneButton.isEnabled = viewData?.isValid ?? false
     }
 
@@ -28,7 +28,7 @@ class LandmarkCreatorViewController: UIViewController {
         super.viewDidLoad()
         presenter.presentableView = self
         nameTextField.addTarget(self, action: #selector(textChanged), for: .editingChanged)
-        updateViews()
+        updateDoneButton()
     }
     
     @IBAction func tappedDone(_ sender: Any) {
