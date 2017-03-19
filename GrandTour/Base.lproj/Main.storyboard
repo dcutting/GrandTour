@@ -89,6 +89,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="doneButton" destination="gMp-fN-Aiz" id="phe-SN-aG0"/>
                         <outlet property="nameTextField" destination="SaR-De-Qka" id="dAJ-cA-R6O"/>
                     </connections>
                 </viewController>
