@@ -3,11 +3,9 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
-    
-    var selectedAnnotation: MKAnnotation?
     
     override func viewDidLoad() {
         loadAnnotations { annotations in
@@ -21,39 +19,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-        annotationView.canShowCallout = true
-        annotationView.rightCalloutAccessoryView = UIButton(type: .infoDark)
-        return annotationView
-    }
-    
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
-            selectedAnnotation = view.annotation
-            performSegue(withIdentifier: "showLandmark", sender: self)
-        }
-    }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showLandmark" {
-            guard let landmarkViewController = segue.destination as? LandmarkViewController else { return }
-            landmarkViewController.name = selectedAnnotation?.title ?? "unknown"
-        } else if segue.identifier == "createLandmark" {
+        if segue.identifier == "createLandmark" {
             guard let landmarkCreatorViewController = segue.destination as? LandmarkCreatorViewController else { return }
             landmarkCreatorViewController.delegate = self
         }
     }
     
-    func makeAnnotation(name: String, coordinate: CLLocationCoordinate2D) -> MKAnnotation {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = name
-        return annotation
-    }
-    
-    func loadAnnotations(completion: @escaping ([MKAnnotation]) -> Void) {
+    private func loadAnnotations(completion: @escaping ([MKAnnotation]) -> Void) {
         guard let url = Bundle.main.url(forResource: "landmarks", withExtension: "json") else {
             completion([])
             return
@@ -101,16 +75,30 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         task.resume()
     }
+
+    fileprivate func makeAnnotation(name: String, coordinate: CLLocationCoordinate2D) -> MKAnnotation {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = name
+        return annotation
+    }
+}
+
+extension MapViewController: MKMapViewDelegate {
+
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+        annotationView.canShowCallout = true
+        return annotationView
+    }
 }
 
 extension MapViewController: LandmarkCreatorViewControllerDelegate {
 
     func createdLocation(named name: String) {
-
         guard !name.isEmpty else { return }
-        
-        let center = mapView.centerCoordinate
+        let center = self.mapView.centerCoordinate
         let annotation = makeAnnotation(name: name, coordinate: center)
-        mapView.addAnnotation(annotation)
+        self.mapView.addAnnotation(annotation)
     }
 }
