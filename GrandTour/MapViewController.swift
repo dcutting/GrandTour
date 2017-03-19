@@ -96,7 +96,6 @@ extension MapViewController: MKMapViewDelegate {
 extension MapViewController: LandmarkCreatorViewControllerDelegate {
 
     func createdLocation(named name: String) {
-        guard !name.isEmpty else { return }
         let center = self.mapView.centerCoordinate
         let annotation = makeAnnotation(name: name, coordinate: center)
         self.mapView.addAnnotation(annotation)

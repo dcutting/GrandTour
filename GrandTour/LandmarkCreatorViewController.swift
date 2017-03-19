@@ -13,8 +13,9 @@ class LandmarkCreatorViewController: UIViewController {
     weak var delegate: LandmarkCreatorViewControllerDelegate?
     
     @IBAction func tappedDone(_ sender: Any) {
-        dismiss(animated: true)
         guard let name = nameTextField.text else { return }
+        guard name.characters.count > 2 else { return }
+        dismiss(animated: true)
         delegate?.createdLocation(named: name)
     }
 }
