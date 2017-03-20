@@ -1,6 +1,6 @@
 //  Copyright © 2017 Dan Cutting. All rights reserved.
 
-import Foundation
+import UIKit
 
 struct MapCoordinate {
     let latitude: Double
@@ -12,18 +12,23 @@ struct MapLocation {
     let coordinate: MapCoordinate
 }
 
-protocol MapPresentableView: class {
-    func setLocations(_ locations: [MapLocation])
-    func setCenter(coordinate: MapCoordinate)
-}
-
-class MapPresenter {
+class AppCoordinator {
     
-    weak var presentableView: MapPresentableView?
+    var locations = [MapLocation]()
     
-    private var locations = [MapLocation]()
+    var mapViewController: MapViewController
+    var landmarkCreatorViewController: LandmarkCreatorViewController?
     
-    func displayLocations() {
+    init(mapViewController: MapViewController) {
+        self.mapViewController = mapViewController
+        mapViewController.delegate = self
+    }
+    
+    func start() {
+        loadAndPresentLocations()
+    }
+    
+    func loadAndPresentLocations() {
         loadLocations { locations in
             DispatchQueue.main.async {
                 self.locations = locations
@@ -33,22 +38,16 @@ class MapPresenter {
         }
     }
     
-    private func presentLocations() {
-        self.presentableView?.setLocations(self.locations)
+    func presentLocations() {
+        mapViewController.setLocations(locations)
     }
     
-    private func presentCenter() {
-        if let center = self.locations.first?.coordinate {
-            self.presentableView?.setCenter(coordinate: center)
+    func presentCenter() {
+        if let center = locations.first?.coordinate {
+            mapViewController.setCenter(coordinate: center)
         }
     }
     
-    func createLocation(named name: String, coordinate: MapCoordinate) {
-        let location = makeLocation(name: name, coordinate: coordinate)
-        self.locations.append(location)
-        presentLocations()
-    }
-
     private func loadLocations(completion: @escaping ([MapLocation]) -> Void) {
         guard let url = Bundle.main.url(forResource: "landmarks", withExtension: "json") else {
             completion([])
@@ -98,7 +97,41 @@ class MapPresenter {
         task.resume()
     }
     
-    fileprivate func makeLocation(name: String, coordinate: MapCoordinate) -> MapLocation {
+    func makeLocation(name: String, coordinate: MapCoordinate) -> MapLocation {
         return MapLocation(name: name, coordinate: coordinate)
+    }
+}
+
+extension AppCoordinator: MapViewControllerDelegate {
+
+    func didTapCreateLandmark() {
+        presentLandmarkCreator()
+    }
+    
+    func presentLandmarkCreator() {
+        landmarkCreatorViewController = loadViewController(withIdentifier: "landmarkCreatorViewController") as? LandmarkCreatorViewController
+        guard let landmarkCreatorViewController = landmarkCreatorViewController else { return }
+        landmarkCreatorViewController.delegate = self
+        mapViewController.present(landmarkCreatorViewController, animated: true)
+    }
+
+    func loadViewController(withIdentifier identifier: String) -> UIViewController? {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: identifier)
+    }
+}
+
+extension AppCoordinator: LandmarkCreatorViewControllerDelegate {
+    
+    func createdLocation(named name: String) {
+        let center = mapViewController.centerCoordinate
+        let coordinate = MapCoordinate(latitude: center.latitude, longitude: center.longitude)
+        createLocation(named: name, coordinate: coordinate)
+    }
+
+    func createLocation(named name: String, coordinate: MapCoordinate) {
+        let location = makeLocation(name: name, coordinate: coordinate)
+        locations.append(location)
+        presentLocations()
     }
 }
