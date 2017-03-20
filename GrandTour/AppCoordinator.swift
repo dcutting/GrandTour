@@ -14,10 +14,11 @@ struct MapLocation {
 
 class AppCoordinator {
     
-    var locations = [MapLocation]()
+    fileprivate var locations = [MapLocation]()
+    fileprivate var newLandmarkName = ""
     
-    var mapViewController: MapViewController
-    var landmarkCreatorViewController: LandmarkCreatorViewController?
+    fileprivate var mapViewController: MapViewController
+    fileprivate var landmarkCreatorViewController: LandmarkCreatorViewController?
     
     init(mapViewController: MapViewController) {
         self.mapViewController = mapViewController
@@ -28,7 +29,7 @@ class AppCoordinator {
         loadAndPresentLocations()
     }
     
-    func loadAndPresentLocations() {
+    private func loadAndPresentLocations() {
         loadLocations { locations in
             DispatchQueue.main.async {
                 self.locations = locations
@@ -123,15 +124,27 @@ extension AppCoordinator: MapViewControllerDelegate {
 
 extension AppCoordinator: LandmarkCreatorViewControllerDelegate {
     
-    func createdLocation(named name: String) {
+    func createLandmark() {
+        guard isValid(name: newLandmarkName) else { return }
+
         let center = mapViewController.centerCoordinate
         let coordinate = MapCoordinate(latitude: center.latitude, longitude: center.longitude)
-        createLocation(named: name, coordinate: coordinate)
-    }
+        let location = makeLocation(name: newLandmarkName, coordinate: coordinate)
 
-    func createLocation(named name: String, coordinate: MapCoordinate) {
-        let location = makeLocation(name: name, coordinate: coordinate)
         locations.append(location)
+
         presentLocations()
+        
+        mapViewController.dismiss(animated: true)
+    }
+    
+    func updateName(_ name: String) {
+        newLandmarkName = name
+        let valid = isValid(name: name)
+        landmarkCreatorViewController?.setCanCreate(isEnabled: valid)
+    }
+    
+    private func isValid(name: String) -> Bool {
+        return name.characters.count > 2
     }
 }
