@@ -2,23 +2,26 @@
 
 import Foundation
 
-struct LandmarkCreatorViewData {
-    let name: String
-    let isValid: Bool
-}
-
 protocol LandmarkCreatorPresentableView: class {
-    func setViewData(_ viewData: LandmarkCreatorViewData)
+    func setCanCreate(isEnabled: Bool)
+    func createLocation(named: String)
 }
 
 class LandmarkCreatorPresenter {
     
     weak var presentableView: LandmarkCreatorPresentableView?
     
+    var name = ""
+    
     func updateName(_ name: String) {
+        self.name = name
         let valid = isValid(name: name)
-        let viewData = LandmarkCreatorViewData(name: name, isValid: valid)
-        presentableView?.setViewData(viewData)
+        presentableView?.setCanCreate(isEnabled: valid)
+    }
+    
+    func createLocation() {
+        guard isValid(name: name) else { return }
+        presentableView?.createLocation(named: name)
     }
     
     private func isValid(name: String) -> Bool {
