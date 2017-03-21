@@ -11,17 +11,17 @@ class CreatorPresenter {
     
     weak var presentableView: CreatorPresentableView?
     
-    var name = ""
+    var newLocationName = ""
     
     func updateName(_ name: String) {
-        self.name = name
-        let valid = isValid(name: name)
+        newLocationName = name
+        let valid = isValid(name: newLocationName)
         presentableView?.setCanCreate(isEnabled: valid)
     }
     
     func createLocation() {
-        guard isValid(name: name) else { return }
-        presentableView?.createLocation(named: name)
+        guard isValid(name: newLocationName) else { return }
+        presentableView?.createLocation(named: newLocationName)
     }
     
     private func isValid(name: String) -> Bool {

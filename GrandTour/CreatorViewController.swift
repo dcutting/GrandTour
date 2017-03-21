@@ -3,7 +3,7 @@
 import UIKit
 
 protocol CreatorViewControllerDelegate: class {
-    func createdLocation(named: String)
+    func createLocation(named: String)
 }
 
 class CreatorViewController: UIViewController {
@@ -23,7 +23,7 @@ class CreatorViewController: UIViewController {
     }
     
     func updateName() {
-        guard let text = nameTextField.text else { return }
+        let text = nameTextField.text ?? ""
         presenter.updateName(text)
     }
 
@@ -44,6 +44,6 @@ extension CreatorViewController: CreatorPresentableView {
     
     func createLocation(named name: String) {
         dismiss(animated: true)
-        delegate?.createdLocation(named: name)
+        delegate?.createLocation(named: name)
     }
 }

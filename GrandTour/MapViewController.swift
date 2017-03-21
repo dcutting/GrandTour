@@ -62,8 +62,7 @@ extension MapViewController: MKMapViewDelegate {
 
 extension MapViewController: CreatorViewControllerDelegate {
 
-    func createdLocation(named name: String) {
-        guard !name.isEmpty else { return }
+    func createLocation(named name: String) {
         let center = mapView.centerCoordinate
         let coordinate = MapCoordinate(latitude: center.latitude, longitude: center.longitude)
         presenter.createLocation(named: name, coordinate: coordinate)
