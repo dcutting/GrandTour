@@ -2,14 +2,14 @@
 
 import Foundation
 
-protocol LandmarkCreatorPresentableView: class {
+protocol CreatorPresentableView: class {
     func setCanCreate(isEnabled: Bool)
     func createLocation(named: String)
 }
 
-class LandmarkCreatorPresenter {
+class CreatorPresenter {
     
-    weak var presentableView: LandmarkCreatorPresentableView?
+    weak var presentableView: CreatorPresentableView?
     
     var name = ""
     

@@ -2,18 +2,18 @@
 
 import UIKit
 
-protocol LandmarkCreatorViewControllerDelegate: class {
+protocol CreatorViewControllerDelegate: class {
     func createdLocation(named: String)
 }
 
-class LandmarkCreatorViewController: UIViewController {
+class CreatorViewController: UIViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
     
-    weak var delegate: LandmarkCreatorViewControllerDelegate?
+    weak var delegate: CreatorViewControllerDelegate?
 
-    var presenter = LandmarkCreatorPresenter()
+    var presenter = CreatorPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ class LandmarkCreatorViewController: UIViewController {
     }
 }
 
-extension LandmarkCreatorViewController: LandmarkCreatorPresentableView {
+extension CreatorViewController: CreatorPresentableView {
     
     func setCanCreate(isEnabled: Bool) {
         doneButton.isEnabled = isEnabled
