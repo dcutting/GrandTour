@@ -29,15 +29,18 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="lme-DA-4rJ"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBs-Ue-x9p">
-                                <rect key="frame" x="337" y="28" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBs-Ue-x9p">
+                                <rect key="frame" x="347" y="30" width="22" height="22"/>
                                 <connections>
                                     <segue destination="V88-Rk-iqq" kind="presentation" identifier="createLocation" id="L11-0c-PFU"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="YBs-Ue-x9p" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="10" id="EpU-Ta-9Al"/>
+                            <constraint firstItem="YBs-Ue-x9p" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="Uh7-9t-CA4"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="LL7-du-y1Y" id="cyv-0Q-V1u"/>
