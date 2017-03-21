@@ -52,8 +52,11 @@ class MapPresenter {
         locations.append(location)
         presentLocations()
     }
+}
 
-    private func loadLocations(completion: @escaping ([MapLocation]) -> Void) {
+extension MapPresenter {
+    
+    fileprivate func loadLocations(completion: @escaping ([MapLocation]) -> Void) {
         guard let url = Bundle.main.url(forResource: "landmarks", withExtension: "json") else {
             completion([])
             return
