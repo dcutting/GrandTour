@@ -33,7 +33,7 @@
                                 <rect key="frame" x="337" y="28" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="didTapCreateLandmark:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vrv-FG-SHu"/>
+                                    <action selector="didTapCreateLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7w4-5U-YIY"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -47,10 +47,10 @@
             </objects>
             <point key="canvasLocation" x="136.71875" y="137.109375"/>
         </scene>
-        <!--Landmark Creator View Controller-->
+        <!--Creator View Controller-->
         <scene sceneID="pS7-mR-vnf">
             <objects>
-                <viewController storyboardIdentifier="landmarkCreatorViewController" id="V88-Rk-iqq" customClass="LandmarkCreatorViewController" customModule="GrandTour" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="creatorViewController" id="V88-Rk-iqq" customClass="CreatorViewController" customModule="GrandTour" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ssK-gf-Vnd"/>
                         <viewControllerLayoutGuide type="bottom" id="45c-hg-T6l"/>

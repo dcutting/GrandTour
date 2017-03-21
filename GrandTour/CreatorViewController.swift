@@ -2,35 +2,35 @@
 
 import UIKit
 
-protocol LandmarkCreatorViewControllerDelegate: class {
-    func updateName(_ name: String)
-    func createLandmark()
+protocol CreatorViewControllerDelegate: class {
+    func updateLocation(name: String)
+    func createLocation()
 }
 
-class LandmarkCreatorViewController: UIViewController {
+class CreatorViewController: UIViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
     
-    weak var delegate: LandmarkCreatorViewControllerDelegate?
+    weak var delegate: CreatorViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTextField.addTarget(self, action: #selector(textChanged), for: .editingChanged)
-        updateName()
+        updateLocationName()
     }
     
-    func updateName() {
-        guard let text = nameTextField.text else { return }
-        delegate?.updateName(text)
+    func updateLocationName() {
+        let text = nameTextField.text ?? ""
+        delegate?.updateLocation(name: text)
     }
 
     @IBAction func tappedDone(_ sender: Any) {
-        delegate?.createLandmark()
+        delegate?.createLocation()
     }
     
     @objc private func textChanged() {
-        updateName()
+        updateLocationName()
     }
 
     func setCanCreate(isEnabled: Bool) {

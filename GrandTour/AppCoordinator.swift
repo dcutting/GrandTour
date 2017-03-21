@@ -15,10 +15,10 @@ struct MapLocation {
 class AppCoordinator {
     
     fileprivate var locations = [MapLocation]()
-    fileprivate var newLandmarkName = ""
+    fileprivate var newLocationName = ""
     
     fileprivate var mapViewController: MapViewController
-    fileprivate var landmarkCreatorViewController: LandmarkCreatorViewController?
+    fileprivate var creatorViewController: CreatorViewController?
     
     init(mapViewController: MapViewController) {
         self.mapViewController = mapViewController
@@ -32,11 +32,15 @@ class AppCoordinator {
     private func loadAndPresentLocations() {
         loadLocations { locations in
             DispatchQueue.main.async {
-                self.locations = locations
-                self.presentLocations()
-                self.presentCenter()
+                self.setAndPresentLocations(locations)
             }
         }
+    }
+    
+    private func setAndPresentLocations(_ locations: [MapLocation]) {
+        self.locations = locations
+        presentLocations()
+        presentCenter()
     }
     
     func presentLocations() {
@@ -48,8 +52,69 @@ class AppCoordinator {
             mapViewController.setCenter(coordinate: center)
         }
     }
+}
+
+extension AppCoordinator: MapViewControllerDelegate {
+
+    func didTapCreateLocation() {
+        presentCreator()
+    }
+}
+
+extension AppCoordinator: CreatorViewControllerDelegate {
     
-    private func loadLocations(completion: @escaping ([MapLocation]) -> Void) {
+    func updateLocation(name: String) {
+        newLocationName = name
+        let valid = isValid(name: name)
+        creatorViewController?.setCanCreate(isEnabled: valid)
+    }
+    
+    private func isValid(name: String) -> Bool {
+        return name.characters.count > 2
+    }
+
+    func createLocation() {
+        addLocationForCenterCoordinate()
+        presentLocations()
+        dismissCreator()
+    }
+    
+    private func addLocationForCenterCoordinate() {
+        let location = makeLocationForCenterCoordinate()
+        locations.append(location)
+    }
+    
+    private func makeLocationForCenterCoordinate() -> MapLocation {
+        let center = mapViewController.centerCoordinate
+        let coordinate = MapCoordinate(latitude: center.latitude, longitude: center.longitude)
+        return makeLocation(name: newLocationName, coordinate: coordinate)
+    }
+}
+
+extension AppCoordinator {
+    
+    fileprivate func presentCreator() {
+        creatorViewController = loadCreatorViewController()
+        guard let creatorViewController = creatorViewController else { return }
+        creatorViewController.delegate = self
+        mapViewController.present(creatorViewController, animated: true)
+    }
+    
+    private func loadCreatorViewController() -> CreatorViewController? {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "creatorViewController")
+        return controller as? CreatorViewController
+    }
+    
+    fileprivate func dismissCreator() {
+        creatorViewController?.dismiss(animated: true)
+        creatorViewController = nil
+    }
+}
+
+extension AppCoordinator {
+    
+    fileprivate func loadLocations(completion: @escaping ([MapLocation]) -> Void) {
         guard let url = Bundle.main.url(forResource: "landmarks", withExtension: "json") else {
             completion([])
             return
@@ -98,53 +163,7 @@ class AppCoordinator {
         task.resume()
     }
     
-    func makeLocation(name: String, coordinate: MapCoordinate) -> MapLocation {
+    fileprivate func makeLocation(name: String, coordinate: MapCoordinate) -> MapLocation {
         return MapLocation(name: name, coordinate: coordinate)
-    }
-}
-
-extension AppCoordinator: MapViewControllerDelegate {
-
-    func didTapCreateLandmark() {
-        presentLandmarkCreator()
-    }
-    
-    func presentLandmarkCreator() {
-        landmarkCreatorViewController = loadViewController(withIdentifier: "landmarkCreatorViewController") as? LandmarkCreatorViewController
-        guard let landmarkCreatorViewController = landmarkCreatorViewController else { return }
-        landmarkCreatorViewController.delegate = self
-        mapViewController.present(landmarkCreatorViewController, animated: true)
-    }
-
-    func loadViewController(withIdentifier identifier: String) -> UIViewController? {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: identifier)
-    }
-}
-
-extension AppCoordinator: LandmarkCreatorViewControllerDelegate {
-    
-    func createLandmark() {
-        guard isValid(name: newLandmarkName) else { return }
-
-        let center = mapViewController.centerCoordinate
-        let coordinate = MapCoordinate(latitude: center.latitude, longitude: center.longitude)
-        let location = makeLocation(name: newLandmarkName, coordinate: coordinate)
-
-        locations.append(location)
-
-        presentLocations()
-        
-        mapViewController.dismiss(animated: true)
-    }
-    
-    func updateName(_ name: String) {
-        newLandmarkName = name
-        let valid = isValid(name: name)
-        landmarkCreatorViewController?.setCanCreate(isEnabled: valid)
-    }
-    
-    private func isValid(name: String) -> Bool {
-        return name.characters.count > 2
     }
 }
