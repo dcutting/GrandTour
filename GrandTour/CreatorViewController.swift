@@ -2,16 +2,16 @@
 
 import UIKit
 
-protocol LandmarkCreatorViewControllerDelegate: class {
-    func createdLocation(named: String)
+protocol CreatorViewControllerDelegate: class {
+    func createLocation(named: String)
 }
 
-class LandmarkCreatorViewController: UIViewController {
+class CreatorViewController: UIViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
     
-    weak var delegate: LandmarkCreatorViewControllerDelegate?
+    weak var delegate: CreatorViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class LandmarkCreatorViewController: UIViewController {
         guard let name = nameTextField.text else { return }
         guard isValid() else { return }
         dismiss(animated: true)
-        delegate?.createdLocation(named: name)
+        delegate?.createLocation(named: name)
     }
 
     @objc private func textChanged() {

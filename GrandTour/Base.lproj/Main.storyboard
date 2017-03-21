@@ -33,7 +33,7 @@
                                 <rect key="frame" x="337" y="28" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <segue destination="V88-Rk-iqq" kind="presentation" identifier="createLandmark" id="L11-0c-PFU"/>
+                                    <segue destination="V88-Rk-iqq" kind="presentation" identifier="createLocation" id="L11-0c-PFU"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -47,10 +47,10 @@
             </objects>
             <point key="canvasLocation" x="136.71875" y="137.109375"/>
         </scene>
-        <!--Landmark Creator View Controller-->
+        <!--Creator View Controller-->
         <scene sceneID="pS7-mR-vnf">
             <objects>
-                <viewController id="V88-Rk-iqq" customClass="LandmarkCreatorViewController" customModule="GrandTour" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="V88-Rk-iqq" customClass="CreatorViewController" customModule="GrandTour" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ssK-gf-Vnd"/>
                         <viewControllerLayoutGuide type="bottom" id="45c-hg-T6l"/>

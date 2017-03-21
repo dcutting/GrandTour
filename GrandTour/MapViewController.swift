@@ -21,9 +21,9 @@ class MapViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "createLandmark" {
-            guard let landmarkCreatorViewController = segue.destination as? LandmarkCreatorViewController else { return }
-            landmarkCreatorViewController.delegate = self
+        if segue.identifier == "createLocation" {
+            guard let creatorViewController = segue.destination as? CreatorViewController else { return }
+            creatorViewController.delegate = self
         }
     }
     
@@ -93,9 +93,9 @@ extension MapViewController: MKMapViewDelegate {
     }
 }
 
-extension MapViewController: LandmarkCreatorViewControllerDelegate {
+extension MapViewController: CreatorViewControllerDelegate {
 
-    func createdLocation(named name: String) {
+    func createLocation(named name: String) {
         let center = self.mapView.centerCoordinate
         let annotation = makeAnnotation(name: name, coordinate: center)
         self.mapView.addAnnotation(annotation)
