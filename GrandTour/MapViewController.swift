@@ -26,8 +26,29 @@ class MapViewController: UIViewController {
             creatorViewController.delegate = self
         }
     }
+}
+
+extension MapViewController: MKMapViewDelegate {
+
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+        annotationView.canShowCallout = true
+        return annotationView
+    }
+}
+
+extension MapViewController: CreatorViewControllerDelegate {
+
+    func createLocation(named name: String) {
+        let center = self.mapView.centerCoordinate
+        let annotation = makeAnnotation(name: name, coordinate: center)
+        self.mapView.addAnnotation(annotation)
+    }
+}
+
+extension MapViewController {
     
-    private func loadAnnotations(completion: @escaping ([MKAnnotation]) -> Void) {
+    fileprivate func loadAnnotations(completion: @escaping ([MKAnnotation]) -> Void) {
         guard let url = Bundle.main.url(forResource: "landmarks", withExtension: "json") else {
             completion([])
             return
@@ -75,29 +96,11 @@ class MapViewController: UIViewController {
         }
         task.resume()
     }
-
+    
     fileprivate func makeAnnotation(name: String, coordinate: CLLocationCoordinate2D) -> MKAnnotation {
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         annotation.title = name
         return annotation
-    }
-}
-
-extension MapViewController: MKMapViewDelegate {
-
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-        annotationView.canShowCallout = true
-        return annotationView
-    }
-}
-
-extension MapViewController: CreatorViewControllerDelegate {
-
-    func createLocation(named name: String) {
-        let center = self.mapView.centerCoordinate
-        let annotation = makeAnnotation(name: name, coordinate: center)
-        self.mapView.addAnnotation(annotation)
     }
 }
