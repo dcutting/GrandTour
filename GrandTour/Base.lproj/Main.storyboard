@@ -33,7 +33,7 @@
                                 <rect key="frame" x="337" y="28" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <segue destination="V88-Rk-iqq" kind="presentation" identifier="createLandmark" id="L11-0c-PFU"/>
+                                    <segue destination="V88-Rk-iqq" kind="presentation" identifier="createLocation" id="L11-0c-PFU"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -15,7 +15,7 @@ class MapViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "createLandmark" {
+        if segue.identifier == "createLocation" {
             guard let creatorViewController = segue.destination as? CreatorViewController else { return }
             creatorViewController.delegate = self
         }
