@@ -5,13 +5,11 @@ import MapKit
 
 class MapViewController: UIViewController {
     
-    @IBOutlet weak var mapView: MKMapView!
-    
     var presenter: MapPresenter!
+    @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         presenter.refresh()
     }
 }
@@ -19,6 +17,12 @@ class MapViewController: UIViewController {
 extension MapViewController: MapInterface {
     
     func setLocations(_ locations: [MapLocation]) {
+        DispatchQueue.main.async {
+            self.updateAnnotations(for: locations)
+        }
+    }
+    
+    private func updateAnnotations(for locations: [MapLocation]) {
         mapView.removeAnnotations(mapView.annotations)
         let updatedAnnotations = locations.map { location in
             makeAnnotation(from: location)
@@ -40,8 +44,10 @@ extension MapViewController: MapInterface {
     }
     
     func setCenter(coordinate: MapCoordinate) {
-        let center = makeLocationCoordinate2D(from: coordinate)
-        mapView.centerCoordinate = center
+        DispatchQueue.main.async {
+            let center = self.makeLocationCoordinate2D(from: coordinate)
+            self.mapView.centerCoordinate = center
+        }
     }
 }
 

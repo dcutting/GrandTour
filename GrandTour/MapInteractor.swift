@@ -4,13 +4,12 @@ import Foundation
 
 protocol MapInteractorOutput: class {
     func didFetchLocations(_ locations: [MapLocation])
-    func foundCenter(coordinate: MapCoordinate)
+    func setStartingLocation(_ location: MapLocation)
 }
 
 class MapInteractor {
     
     let locationStore: LocationStore
-    
     weak var output: MapInteractorOutput?
     
     init(locationStore: LocationStore) {
@@ -25,8 +24,8 @@ class MapInteractor {
     
     private func processFetchedLocations(_ locations: [MapLocation]) {
         output?.didFetchLocations(locations)
-        if let center = locations.first?.coordinate {
-            output?.foundCenter(coordinate: center)
+        if let first = locations.first {
+            output?.setStartingLocation(first)
         }
     }
 }

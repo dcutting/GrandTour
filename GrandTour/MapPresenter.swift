@@ -9,8 +9,7 @@ protocol MapInterface: class {
 
 class MapPresenter {
     
-    var interactor: MapInteractor
-
+    let interactor: MapInteractor
     weak var interface: MapInterface?
     
     init(interactor: MapInteractor) {
@@ -28,7 +27,7 @@ extension MapPresenter: MapInteractorOutput {
         interface?.setLocations(locations)
     }
     
-    func foundCenter(coordinate: MapCoordinate) {
-        interface?.setCenter(coordinate: coordinate)
+    func setStartingLocation(_ location: MapLocation) {
+        interface?.setCenter(coordinate: location.coordinate)
     }
 }
