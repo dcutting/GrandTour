@@ -26,26 +26,30 @@ class MapPresenter {
     func displayLocations() {
         loadLocations { locations in
             DispatchQueue.main.async {
-                self.locations = locations
-                self.presentLocations()
-                self.presentCenter()
+                self.setAndPresentLocations(locations)
             }
         }
     }
     
+    private func setAndPresentLocations(_ locations: [MapLocation]) {
+        self.locations = locations
+        presentLocations()
+        presentCenter()
+    }
+    
     private func presentLocations() {
-        self.presentableView?.setLocations(self.locations)
+        presentableView?.setLocations(locations)
     }
     
     private func presentCenter() {
-        if let center = self.locations.first?.coordinate {
-            self.presentableView?.setCenter(coordinate: center)
+        if let center = locations.first?.coordinate {
+            presentableView?.setCenter(coordinate: center)
         }
     }
     
     func createLocation(named name: String, coordinate: MapCoordinate) {
         let location = makeLocation(name: name, coordinate: coordinate)
-        self.locations.append(location)
+        locations.append(location)
         presentLocations()
     }
 

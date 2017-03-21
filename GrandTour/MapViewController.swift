@@ -10,8 +10,8 @@ class MapViewController: UIViewController {
     let presenter = MapPresenter()
     
     override func viewDidLoad() {
-        self.presenter.presentableView = self
-        self.presenter.displayLocations()
+        presenter.presentableView = self
+        presenter.displayLocations()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -25,11 +25,11 @@ class MapViewController: UIViewController {
 extension MapViewController: MapPresentableView {
     
     func setLocations(_ locations: [MapLocation]) {
-        self.mapView.removeAnnotations(self.mapView.annotations)
+        mapView.removeAnnotations(mapView.annotations)
         let updatedAnnotations = locations.map { location in
             makeAnnotation(from: location)
         }
-        self.mapView.addAnnotations(updatedAnnotations)
+        mapView.addAnnotations(updatedAnnotations)
     }
     
     private func makeAnnotation(from location: MapLocation) -> MKAnnotation {
@@ -47,7 +47,7 @@ extension MapViewController: MapPresentableView {
     
     func setCenter(coordinate: MapCoordinate) {
         let center = makeLocationCoordinate2D(from: coordinate)
-        self.mapView.centerCoordinate = center
+        mapView.centerCoordinate = center
     }
 }
 
@@ -64,8 +64,8 @@ extension MapViewController: CreatorViewControllerDelegate {
 
     func createdLocation(named name: String) {
         guard !name.isEmpty else { return }
-        let center = self.mapView.centerCoordinate
+        let center = mapView.centerCoordinate
         let coordinate = MapCoordinate(latitude: center.latitude, longitude: center.longitude)
-        self.presenter.createLocation(named: name, coordinate: coordinate)
+        presenter.createLocation(named: name, coordinate: coordinate)
     }
 }
