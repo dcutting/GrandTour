@@ -7,22 +7,16 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    let presenter = MapPresenter()
+    var presenter: MapPresenter!
     
     override func viewDidLoad() {
-        presenter.presentableView = self
-        presenter.displayLocations()
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "createLocation" {
-            guard let creatorViewController = segue.destination as? CreatorViewController else { return }
-            creatorViewController.delegate = self
-        }
+        super.viewDidLoad()
+        
+        presenter.refresh()
     }
 }
 
-extension MapViewController: MapPresentableView {
+extension MapViewController: MapInterface {
     
     func setLocations(_ locations: [MapLocation]) {
         mapView.removeAnnotations(mapView.annotations)
@@ -57,14 +51,5 @@ extension MapViewController: MKMapViewDelegate {
         let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
         annotationView.canShowCallout = true
         return annotationView
-    }
-}
-
-extension MapViewController: CreatorViewControllerDelegate {
-
-    func createLocation(named name: String) {
-        let center = mapView.centerCoordinate
-        let coordinate = MapCoordinate(latitude: center.latitude, longitude: center.longitude)
-        presenter.createLocation(named: name, coordinate: coordinate)
     }
 }
