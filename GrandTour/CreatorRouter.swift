@@ -4,28 +4,41 @@ import UIKit
 
 class CreatorRouter {
     
-    var viewController: CreatorViewController?
     let locationStore: LocationStore
-    
+
+    var sourceViewController: UIViewController?
+
     init(locationStore: LocationStore) {
         self.locationStore = locationStore
     }
     
-    func presentCreatorInterface(from source: UIViewController) {
-        
-        viewController = source.storyboard?.instantiateViewController(withIdentifier: "creatorViewController") as? CreatorViewController
-        
+    func presentCreator(from source: UIViewController) {
+        sourceViewController = source
+        let viewController = prepareCreatorViewController()
+        source.present(viewController, animated: true)
+    }
+    
+    private func prepareCreatorViewController() -> CreatorViewController {
+        let viewController = loadCreatorViewController()
+        wire(viewController)
+        return viewController
+    }
+    
+    private func loadCreatorViewController() -> CreatorViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: "creatorViewController") as! CreatorViewController
+    }
+    
+    private func wire(_ viewController: CreatorViewController) {
         let interactor = CreatorInteractor(locationStore: locationStore)
         let presenter = CreatorPresenter(interactor: interactor, router: self)
-        viewController?.presenter = presenter
-        
+        viewController.presenter = presenter
         interactor.output = presenter
         presenter.interface = viewController
-        
-        source.present(viewController!, animated: true)
     }
     
     func dismissCreator() {
-        viewController?.dismiss(animated: true)
+        sourceViewController?.dismiss(animated: true)
+        sourceViewController = nil
     }
 }
