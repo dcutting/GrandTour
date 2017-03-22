@@ -21,7 +21,7 @@ class MapViewController: UIViewController {
 
 extension MapViewController: MapInterface {
     
-    func setLocations(_ locations: [MapInterfaceLocation]) {
+    func setLocations(_ locations: [PresentableLocation]) {
         DispatchQueue.main.async {
             self.updateAnnotations(for: locations)
         }
@@ -46,7 +46,7 @@ extension MapViewController: MKMapViewDelegate {
 
 extension MapViewController {
     
-    fileprivate func updateAnnotations(for locations: [MapInterfaceLocation]) {
+    fileprivate func updateAnnotations(for locations: [PresentableLocation]) {
         mapView.removeAnnotations(mapView.annotations)
         let updatedAnnotations = locations.map { location in
             makeAnnotation(from: location)
@@ -54,7 +54,7 @@ extension MapViewController {
         mapView.addAnnotations(updatedAnnotations)
     }
     
-    fileprivate func makeAnnotation(from location: MapInterfaceLocation) -> MKAnnotation {
+    fileprivate func makeAnnotation(from location: PresentableLocation) -> MKAnnotation {
         let annotation = MKPointAnnotation()
         annotation.title = location.name
         annotation.coordinate = makeLocationCoordinate2D(fromLatitude: location.latitude, longitude: location.longitude)

@@ -22,6 +22,8 @@
 		C830EF7C1E61BF3600200D29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C830EF7B1E61BF3600200D29 /* Assets.xcassets */; };
 		C830EF7F1E61BF3600200D29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C830EF7D1E61BF3600200D29 /* LaunchScreen.storyboard */; };
 		C86A25551E8275860085E772 /* MapName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86A25541E8275860085E772 /* MapName.swift */; };
+		C86A25571E8287E00085E772 /* MapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86A25561E8287E00085E772 /* MapInterface.swift */; };
+		C86A25591E8288420085E772 /* CreatorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86A25581E8288420085E772 /* CreatorInterface.swift */; };
 		C89A926A1E81CE610032EC0E /* MapLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89A92691E81CE610032EC0E /* MapLocation.swift */; };
 		C89A926C1E81CE790032EC0E /* MapCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89A926B1E81CE790032EC0E /* MapCoordinate.swift */; };
 		C89A926E1E81D5500032EC0E /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89A926D1E81D5500032EC0E /* LocationStore.swift */; };
@@ -45,6 +47,8 @@
 		C830EF7E1E61BF3600200D29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C830EF801E61BF3600200D29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C86A25541E8275860085E772 /* MapName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapName.swift; sourceTree = "<group>"; };
+		C86A25561E8287E00085E772 /* MapInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInterface.swift; sourceTree = "<group>"; };
+		C86A25581E8288420085E772 /* CreatorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorInterface.swift; sourceTree = "<group>"; };
 		C89A92691E81CE610032EC0E /* MapLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapLocation.swift; sourceTree = "<group>"; };
 		C89A926B1E81CE790032EC0E /* MapCoordinate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCoordinate.swift; sourceTree = "<group>"; };
 		C89A926D1E81D5500032EC0E /* LocationStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
@@ -108,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				C830EF761E61BF3600200D29 /* MapViewController.swift */,
+				C86A25561E8287E00085E772 /* MapInterface.swift */,
 				C8020B711E7EC4AE0098FC93 /* MapPresenter.swift */,
 				C81FE5391E816F7C00C18C81 /* MapInteractor.swift */,
 				C81FE53B1E8174B300C18C81 /* MapRouter.swift */,
@@ -119,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				C81352A41E68D82A00702F9F /* CreatorViewController.swift */,
+				C86A25581E8288420085E772 /* CreatorInterface.swift */,
 				C8020B731E7F25270098FC93 /* CreatorPresenter.swift */,
 				C81FE53D1E8174D400C18C81 /* CreatorInteractor.swift */,
 				C81FE53F1E8174E400C18C81 /* CreatorRouter.swift */,
@@ -227,8 +233,10 @@
 				C89A926C1E81CE790032EC0E /* MapCoordinate.swift in Sources */,
 				C8020B741E7F25270098FC93 /* CreatorPresenter.swift in Sources */,
 				C89A926A1E81CE610032EC0E /* MapLocation.swift in Sources */,
+				C86A25571E8287E00085E772 /* MapInterface.swift in Sources */,
 				C81352A51E68D82A00702F9F /* CreatorViewController.swift in Sources */,
 				C830EF771E61BF3600200D29 /* MapViewController.swift in Sources */,
+				C86A25591E8288420085E772 /* CreatorInterface.swift in Sources */,
 				C81FE53A1E816F7C00C18C81 /* MapInteractor.swift in Sources */,
 				C81FE53C1E8174B300C18C81 /* MapRouter.swift in Sources */,
 				C81FE53E1E8174D400C18C81 /* CreatorInteractor.swift in Sources */,

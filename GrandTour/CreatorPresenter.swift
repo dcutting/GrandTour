@@ -6,11 +6,6 @@ protocol CreatorModuleDelegate: class {
     func createdLocation()
 }
 
-protocol CreatorInterface: class {
-    func enableDoneButton()
-    func disableDoneButton()
-}
-
 class CreatorPresenter {
     
     let interactor: CreatorInteractor
