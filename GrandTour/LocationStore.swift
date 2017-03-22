@@ -63,9 +63,7 @@ class LocationStore {
                         completion([])
                         return
                     }
-                    let mapName = MapName(value: name)
-                    let mapCoordinate = MapCoordinate(latitude: latitude, longitude: longitude)
-                    let mapLocation = self.makeLocation(name: mapName, coordinate: mapCoordinate)
+                    let mapLocation = self.makeLocation(name: name, latitude: latitude, longitude: longitude)
                     annotations.append(mapLocation)
                 }
                 completion(annotations)
@@ -76,6 +74,12 @@ class LocationStore {
         task.resume()
     }
     
+    private func makeLocation(name: String, latitude: Double, longitude: Double) -> MapLocation {
+        let mapName = MapName(value: name)
+        let mapCoordinate = MapCoordinate(latitude: latitude, longitude: longitude)
+        return makeLocation(name: mapName, coordinate: mapCoordinate)
+    }
+
     private func makeLocation(name: MapName, coordinate: MapCoordinate) -> MapLocation {
         return MapLocation(name: name, coordinate: coordinate)
     }
