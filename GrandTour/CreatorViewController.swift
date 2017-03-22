@@ -20,18 +20,23 @@ class CreatorViewController: UIViewController {
     }
     
     func updateName() {
-        let text = nameTextField.text ?? ""
+        let text = currentName()
         presenter.updatedName(text)
     }
-
+    
     @IBAction func tappedDone(_ sender: Any) {
-        presenter.tappedDone()
+        let text = currentName()
+        presenter.tappedDone(withName: text)
+    }
+
+    private func currentName() -> String {
+        return nameTextField.text ?? ""
     }
 }
 
 extension CreatorViewController: CreatorInterface {
     
-    func setCanCreate(isEnabled: Bool) {
+    func setDoneButton(isEnabled: Bool) {
         doneButton.isEnabled = isEnabled
     }
 }

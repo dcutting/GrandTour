@@ -3,7 +3,7 @@
 import Foundation
 
 protocol CreatorInterface: class {
-    func setCanCreate(isEnabled: Bool)
+    func setDoneButton(isEnabled: Bool)
 }
 
 class CreatorPresenter {
@@ -21,8 +21,8 @@ class CreatorPresenter {
         interactor.updateName(name)
     }
     
-    func tappedDone() {
-        interactor.createLocation()
+    func tappedDone(withName name: String) {
+        interactor.createLocation(named: name)
     }
     
     private func isValid(name: String) -> Bool {
@@ -32,4 +32,11 @@ class CreatorPresenter {
 
 extension CreatorPresenter: CreatorInteractorOutput {
     
+    func setCanCreate(isEnabled: Bool) {
+        interface?.setDoneButton(isEnabled: isEnabled)
+    }
+    
+    func createdLocation() {
+        router?.dismissCreator()
+    }
 }

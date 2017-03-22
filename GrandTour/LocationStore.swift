@@ -69,6 +69,6 @@ class LocationStore {
     
     func createLocation(named name: String, coordinate: MapCoordinate) {
         let location = makeLocation(name: name, coordinate: coordinate)
-        
+        locations?.append(location)
     }
 }

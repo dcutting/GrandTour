@@ -7,6 +7,8 @@ class MapRouter {
     let viewController: MapViewController
     let locationStore = LocationStore()
     
+    var creatorRouter: CreatorRouter?
+    
     init(mapViewController: MapViewController) {
         self.viewController = mapViewController
     }
@@ -19,8 +21,8 @@ class MapRouter {
         presenter.interface = viewController
     }
     
-    func presentCreator() {
-        let creatorRouter = CreatorRouter(locationStore: locationStore)
-        creatorRouter.presentCreator(from: viewController)
+    func presentCreator(for coordinate: MapCoordinate) {
+        creatorRouter = CreatorRouter(locationStore: locationStore, coordinate: coordinate)
+        creatorRouter?.presentCreator(from: viewController)
     }
 }

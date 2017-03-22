@@ -3,42 +3,29 @@
 import Foundation
 
 protocol CreatorInteractorOutput: class {
-    
+    func setCanCreate(isEnabled: Bool)
+    func createdLocation()
 }
 
 class CreatorInteractor {
     
     let locationStore: LocationStore
     weak var output: CreatorInteractorOutput?
+    let coordinate: MapCoordinate
     
-    init(locationStore: LocationStore) {
+    init(locationStore: LocationStore, coordinate: MapCoordinate) {
         self.locationStore = locationStore
+        self.coordinate = coordinate
     }
     
-//    func createLocation(named name: String, coordinate: MapCoordinate) {
-//        let location = makeLocation(name: name, coordinate: coordinate)
-//        locations.append(location)
-//        presentLocations()
-//    }
-
-    //extension MapViewController: CreatorViewControllerDelegate {
-    //
-    //    func createLocation(named name: String) {
-    //        let center = mapView.centerCoordinate
-    //        let coordinate = MapCoordinate(latitude: center.latitude, longitude: center.longitude)
-    //        presenter.createLocation(named: name, coordinate: coordinate)
-    //    }
-    //}
-
     func updateName(_ name: String) {
-//        let valid = isValid(name: newLocationName)
-//        output.setCanCreate(isEnabled: valid)
+        let valid = isValid(name: name)
+        output?.setCanCreate(isEnabled: valid)
     }
     
-    func createLocation() {
-//        guard isValid(name: newLocationName) else { return }
-//        store.createLocation(named: newLocationName)
-//        router.dismissCreator()
+    func createLocation(named name: String) {
+        locationStore.createLocation(named: name, coordinate: coordinate)
+        output?.createdLocation()
     }
     
     private func isValid(name: String) -> Bool {

@@ -22,8 +22,8 @@ class MapPresenter {
         interactor.fetchLocations()
     }
     
-    func createLocation() {
-        router?.presentCreator()
+    func createLocation(for coordinate: MapCoordinate) {
+        router?.presentCreator(for: coordinate)
     }
 }
 

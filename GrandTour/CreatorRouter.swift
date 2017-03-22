@@ -5,11 +5,13 @@ import UIKit
 class CreatorRouter {
     
     let locationStore: LocationStore
+    let coordinate: MapCoordinate
 
     var sourceViewController: UIViewController?
 
-    init(locationStore: LocationStore) {
+    init(locationStore: LocationStore, coordinate: MapCoordinate) {
         self.locationStore = locationStore
+        self.coordinate = coordinate
     }
     
     func presentCreator(from source: UIViewController) {
@@ -30,7 +32,7 @@ class CreatorRouter {
     }
     
     private func wire(_ viewController: CreatorViewController) {
-        let interactor = CreatorInteractor(locationStore: locationStore)
+        let interactor = CreatorInteractor(locationStore: locationStore, coordinate: coordinate)
         let presenter = CreatorPresenter(interactor: interactor, router: self)
         viewController.presenter = presenter
         interactor.output = presenter

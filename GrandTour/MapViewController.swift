@@ -17,7 +17,9 @@ class MapViewController: UIViewController {
 extension MapViewController {
 
     @IBAction func didTapCreateLocation(_ sender: Any) {
-        presenter.createLocation()
+        let center = mapView.centerCoordinate
+        let coordinate = MapCoordinate(latitude: center.latitude, longitude: center.longitude)
+        presenter.createLocation(for: coordinate)
     }
 }
 
