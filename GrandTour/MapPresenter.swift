@@ -2,9 +2,15 @@
 
 import Foundation
 
+struct MapInterfaceLocation {
+    let name: String
+    let latitude: Double
+    let longitude: Double
+}
+
 protocol MapInterface: class {
-    func setLocations(_ locations: [MapLocation])
-    func setCenter(coordinate: MapCoordinate)
+    func setLocations(_ locations: [MapInterfaceLocation])
+    func setStartingCoordinate(latitude: Double, longitude: Double)
 }
 
 class MapPresenter {
@@ -22,7 +28,8 @@ class MapPresenter {
         interactor.start()
     }
     
-    func tappedCreate(withCoordinate coordinate: MapCoordinate) {
+    func tappedCreate(withLatitude latitude: Double, longitude: Double) {
+        let coordinate = MapCoordinate(latitude: latitude, longitude: longitude)
         router?.presentCreator(for: coordinate)
     }
 }
@@ -30,11 +37,18 @@ class MapPresenter {
 extension MapPresenter: MapInteractorOutput {
 
     func fetchedLocations(_ locations: [MapLocation]) {
-        interface?.setLocations(locations)
+        let formattedLocations = format(locations: locations)
+        interface?.setLocations(formattedLocations)
     }
     
-    func setStartingLocation(_ location: MapLocation) {
-        interface?.setCenter(coordinate: location.coordinate)
+    private func format(locations: [MapLocation]) -> [MapInterfaceLocation] {
+        return locations.map {
+            MapInterfaceLocation(name: $0.name.value, latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude)
+        }
+    }
+    
+    func setStartingCoordinate(_ coordinate: MapCoordinate) {
+        interface?.setStartingCoordinate(latitude: coordinate.latitude, longitude: coordinate.longitude)
     }
 }
 

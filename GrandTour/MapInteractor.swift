@@ -4,7 +4,7 @@ import Foundation
 
 protocol MapInteractorOutput: class {
     func fetchedLocations(_ locations: [MapLocation])
-    func setStartingLocation(_ location: MapLocation)
+    func setStartingCoordinate(_ coordinate: MapCoordinate)
 }
 
 class MapInteractor {
@@ -18,9 +18,8 @@ class MapInteractor {
 
     func start() {
         fetchAndOutputLocations() { [weak self] locations in
-            if let first = locations.first {
-                self?.output?.setStartingLocation(first)
-            }
+            guard let coordinate = locations.first?.coordinate else { return }
+            self?.output?.setStartingCoordinate(coordinate)
         }
     }
     
