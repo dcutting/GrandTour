@@ -19,7 +19,7 @@ class CreatorInteractor {
         self.coordinate = coordinate
     }
     
-    func updateName(_ name: String) {
+    func validate(name: String) {
         if isValid(name: name) {
             output?.canCreateLocation()
         } else {

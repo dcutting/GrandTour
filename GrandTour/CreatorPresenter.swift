@@ -2,13 +2,13 @@
 
 import Foundation
 
+protocol CreatorModuleDelegate: class {
+    func createdLocation()
+}
+
 protocol CreatorInterface: class {
     func enableDoneButton()
     func disableDoneButton()
-}
-
-protocol CreatorModuleDelegate: class {
-    func createdLocation()
 }
 
 class CreatorPresenter {
@@ -24,15 +24,11 @@ class CreatorPresenter {
     }
     
     func updatedName(_ name: String) {
-        interactor.updateName(name)
+        interactor.validate(name: name)
     }
     
     func tappedDone(withName name: String) {
         interactor.createLocation(named: name)
-    }
-    
-    private func isValid(name: String) -> Bool {
-        return name.characters.count > 2
     }
 }
 

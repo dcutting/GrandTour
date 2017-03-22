@@ -10,10 +10,19 @@ class LocationStore {
         if let locations = locations {
             completion(locations)
         } else {
-            loadLocations { [weak self] locations in
-                self?.locations = locations
-                completion(locations)
-            }
+            loadAndCacheLocations(completion: completion)
+        }
+    }
+    
+    func createLocation(named name: String, coordinate: MapCoordinate) {
+        let location = makeLocation(name: name, coordinate: coordinate)
+        locations?.append(location)
+    }
+
+    private func loadAndCacheLocations(completion: @escaping ([MapLocation]) -> Void) {
+        loadLocations { [weak self] locations in
+            self?.locations = locations
+            completion(locations)
         }
     }
     
@@ -66,12 +75,7 @@ class LocationStore {
         task.resume()
     }
     
-    fileprivate func makeLocation(name: String, coordinate: MapCoordinate) -> MapLocation {
+    private func makeLocation(name: String, coordinate: MapCoordinate) -> MapLocation {
         return MapLocation(name: name, coordinate: coordinate)
-    }
-    
-    func createLocation(named name: String, coordinate: MapCoordinate) {
-        let location = makeLocation(name: name, coordinate: coordinate)
-        locations?.append(location)
     }
 }

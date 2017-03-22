@@ -15,10 +15,11 @@ class MapRouter {
         wire()
     }
     
-    func wire() {
+    private func wire() {
         let interactor = MapInteractor(locationStore: locationStore)
         let presenter = MapPresenter(interactor: interactor, router: self)
         viewController.presenter = presenter
+
         interactor.output = presenter
         presenter.interface = viewController
 

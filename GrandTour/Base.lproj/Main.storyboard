@@ -32,7 +32,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBs-Ue-x9p">
                                 <rect key="frame" x="347" y="30" width="22" height="22"/>
                                 <connections>
-                                    <action selector="didTapCreateLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8A3-nX-u0D"/>
+                                    <action selector="tappedCreate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fzo-5X-5D9"/>
                                 </connections>
                             </button>
                         </subviews>

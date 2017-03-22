@@ -22,10 +22,6 @@ class MapPresenter {
         interactor.start()
     }
     
-    func refresh() {
-        interactor.fetchLocations()
-    }
-    
     func tappedCreate(withCoordinate coordinate: MapCoordinate) {
         router?.presentCreator(for: coordinate)
     }
@@ -45,6 +41,6 @@ extension MapPresenter: MapInteractorOutput {
 extension MapPresenter: CreatorModuleDelegate {
     
     func createdLocation() {
-        refresh()
+        interactor.fetchLocations()
     }
 }

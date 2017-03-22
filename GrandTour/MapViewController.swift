@@ -28,27 +28,6 @@ extension MapViewController: MapInterface {
         }
     }
     
-    private func updateAnnotations(for locations: [MapLocation]) {
-        mapView.removeAnnotations(mapView.annotations)
-        let updatedAnnotations = locations.map { location in
-            makeAnnotation(from: location)
-        }
-        mapView.addAnnotations(updatedAnnotations)
-    }
-    
-    private func makeAnnotation(from location: MapLocation) -> MKAnnotation {
-        let annotation = MKPointAnnotation()
-        annotation.title = location.name
-        annotation.coordinate = makeLocationCoordinate2D(from: location.coordinate)
-        return annotation
-    }
-    
-    private func makeLocationCoordinate2D(from coordinate: MapCoordinate) -> CLLocationCoordinate2D {
-        let latitude = coordinate.latitude
-        let longitude = coordinate.longitude
-        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    }
-    
     func setCenter(coordinate: MapCoordinate) {
         DispatchQueue.main.async {
             let center = self.makeLocationCoordinate2D(from: coordinate)
@@ -63,5 +42,29 @@ extension MapViewController: MKMapViewDelegate {
         let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
         annotationView.canShowCallout = true
         return annotationView
+    }
+}
+
+extension MapViewController {
+    
+    fileprivate func updateAnnotations(for locations: [MapLocation]) {
+        mapView.removeAnnotations(mapView.annotations)
+        let updatedAnnotations = locations.map { location in
+            makeAnnotation(from: location)
+        }
+        mapView.addAnnotations(updatedAnnotations)
+    }
+    
+    fileprivate func makeAnnotation(from location: MapLocation) -> MKAnnotation {
+        let annotation = MKPointAnnotation()
+        annotation.title = location.name
+        annotation.coordinate = makeLocationCoordinate2D(from: location.coordinate)
+        return annotation
+    }
+    
+    fileprivate func makeLocationCoordinate2D(from coordinate: MapCoordinate) -> CLLocationCoordinate2D {
+        let latitude = coordinate.latitude
+        let longitude = coordinate.longitude
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 }

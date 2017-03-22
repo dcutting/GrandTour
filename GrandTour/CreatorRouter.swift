@@ -22,6 +22,11 @@ class CreatorRouter {
         source.present(viewController, animated: true)
     }
     
+    func dismissCreator() {
+        sourceViewController?.dismiss(animated: true)
+        sourceViewController = nil
+    }
+
     private func prepareCreatorViewController() -> CreatorViewController {
         let viewController = loadCreatorViewController()
         wire(viewController)
@@ -37,13 +42,10 @@ class CreatorRouter {
         let interactor = CreatorInteractor(locationStore: locationStore, coordinate: coordinate)
         let presenter = CreatorPresenter(interactor: interactor, router: self)
         viewController.presenter = presenter
+
         interactor.output = presenter
         presenter.interface = viewController
+        
         presenter.moduleDelegate = creatorModuleDelegate
-    }
-    
-    func dismissCreator() {
-        sourceViewController?.dismiss(animated: true)
-        sourceViewController = nil
     }
 }
