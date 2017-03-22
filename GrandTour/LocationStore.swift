@@ -10,7 +10,10 @@ class LocationStore {
         if let locations = locations {
             completion(locations)
         } else {
-            loadLocations(completion: completion)
+            loadLocations { [weak self] locations in
+                self?.locations = locations
+                completion(locations)
+            }
         }
     }
     

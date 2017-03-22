@@ -6,12 +6,14 @@ class CreatorRouter {
     
     let locationStore: LocationStore
     let coordinate: MapCoordinate
+    let creatorModuleDelegate: CreatorModuleDelegate?
 
     var sourceViewController: UIViewController?
 
-    init(locationStore: LocationStore, coordinate: MapCoordinate) {
+    init(locationStore: LocationStore, coordinate: MapCoordinate, creatorModuleDelegate: CreatorModuleDelegate?) {
         self.locationStore = locationStore
         self.coordinate = coordinate
+        self.creatorModuleDelegate = creatorModuleDelegate
     }
     
     func presentCreator(from source: UIViewController) {
@@ -37,6 +39,7 @@ class CreatorRouter {
         viewController.presenter = presenter
         interactor.output = presenter
         presenter.interface = viewController
+        presenter.delegate = creatorModuleDelegate
     }
     
     func dismissCreator() {

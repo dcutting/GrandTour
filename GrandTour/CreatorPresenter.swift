@@ -6,11 +6,16 @@ protocol CreatorInterface: class {
     func setDoneButton(isEnabled: Bool)
 }
 
+protocol CreatorModuleDelegate: class {
+    func didCreateLocation()
+}
+
 class CreatorPresenter {
     
     let interactor: CreatorInteractor
     weak var router: CreatorRouter?
     weak var interface: CreatorInterface?
+    weak var delegate: CreatorModuleDelegate?
     
     init(interactor: CreatorInteractor, router: CreatorRouter) {
         self.interactor = interactor
@@ -37,6 +42,7 @@ extension CreatorPresenter: CreatorInteractorOutput {
     }
     
     func createdLocation() {
+        delegate?.didCreateLocation()
         router?.dismissCreator()
     }
 }

@@ -37,3 +37,10 @@ extension MapPresenter: MapInteractorOutput {
         interface?.setCenter(coordinate: location.coordinate)
     }
 }
+
+extension MapPresenter: CreatorModuleDelegate {
+    
+    func didCreateLocation() {
+        refresh()
+    }
+}
