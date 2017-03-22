@@ -32,7 +32,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBs-Ue-x9p">
                                 <rect key="frame" x="347" y="30" width="22" height="22"/>
                                 <connections>
-                                    <segue destination="V88-Rk-iqq" kind="presentation" identifier="createLocation" id="L11-0c-PFU"/>
+                                    <action selector="didTapCreateLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8A3-nX-u0D"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -53,7 +53,7 @@
         <!--Creator View Controller-->
         <scene sceneID="pS7-mR-vnf">
             <objects>
-                <viewController id="V88-Rk-iqq" customClass="CreatorViewController" customModule="GrandTour" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="creatorViewController" id="V88-Rk-iqq" customClass="CreatorViewController" customModule="GrandTour" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ssK-gf-Vnd"/>
                         <viewControllerLayoutGuide type="bottom" id="45c-hg-T6l"/>

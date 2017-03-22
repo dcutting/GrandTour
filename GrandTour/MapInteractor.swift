@@ -17,7 +17,7 @@ class MapInteractor {
     }
 
     func fetchLocations() {
-        locationStore.loadLocations { [weak self] locations in
+        locationStore.fetchLocations { [weak self] locations in
             self?.processFetchedLocations(locations)
         }
     }

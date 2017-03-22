@@ -14,6 +14,13 @@ class MapViewController: UIViewController {
     }
 }
 
+extension MapViewController {
+
+    @IBAction func didTapCreateLocation(_ sender: Any) {
+        presenter.createLocation()
+    }
+}
+
 extension MapViewController: MapInterface {
     
     func setLocations(_ locations: [MapLocation]) {

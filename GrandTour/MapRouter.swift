@@ -4,14 +4,24 @@ import Foundation
 
 class MapRouter {
     
-    func wire(viewController: MapViewController) {
-        let locationStore = LocationStore()
-        
+    let viewController: MapViewController
+    let locationStore = LocationStore()
+    
+    init(mapViewController: MapViewController) {
+        self.viewController = mapViewController
+    }
+    
+    func wire() {
         let interactor = MapInteractor(locationStore: locationStore)
-        let presenter = MapPresenter(interactor: interactor)
+        let presenter = MapPresenter(interactor: interactor, router: self)
         viewController.presenter = presenter
 
         interactor.output = presenter
         presenter.interface = viewController
+    }
+    
+    func presentCreator() {
+        let creatorRouter = CreatorRouter(locationStore: locationStore)
+        creatorRouter.presentCreatorInterface(from: viewController)
     }
 }

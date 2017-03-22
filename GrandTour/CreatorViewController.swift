@@ -2,22 +2,15 @@
 
 import UIKit
 
-protocol CreatorViewControllerDelegate: class {
-    func createLocation(named: String)
-}
-
 class CreatorViewController: UIViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
     
-    weak var delegate: CreatorViewControllerDelegate?
-
-    var presenter = CreatorPresenter()
+    var presenter: CreatorPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.presentableView = self
         nameTextField.addTarget(self, action: #selector(textChanged), for: .editingChanged)
         updateName()
     }
@@ -36,14 +29,9 @@ class CreatorViewController: UIViewController {
     }
 }
 
-extension CreatorViewController: CreatorPresentableView {
+extension CreatorViewController: CreatorInterface {
     
     func setCanCreate(isEnabled: Bool) {
         doneButton.isEnabled = isEnabled
-    }
-    
-    func createLocation(named name: String) {
-        dismiss(animated: true)
-        delegate?.createLocation(named: name)
     }
 }

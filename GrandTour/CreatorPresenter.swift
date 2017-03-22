@@ -2,29 +2,34 @@
 
 import Foundation
 
-protocol CreatorPresentableView: class {
+protocol CreatorInterface: class {
     func setCanCreate(isEnabled: Bool)
-    func createLocation(named: String)
 }
 
 class CreatorPresenter {
     
-    weak var presentableView: CreatorPresentableView?
+    let interactor: CreatorInteractor
+    weak var router: CreatorRouter?
+    weak var interface: CreatorInterface?
     
-    var newLocationName = ""
+    init(interactor: CreatorInteractor, router: CreatorRouter) {
+        self.interactor = interactor
+        self.router = router
+    }
     
     func updateName(_ name: String) {
-        newLocationName = name
-        let valid = isValid(name: newLocationName)
-        presentableView?.setCanCreate(isEnabled: valid)
+        interactor.updateName(name)
     }
     
     func createLocation() {
-        guard isValid(name: newLocationName) else { return }
-        presentableView?.createLocation(named: newLocationName)
+        interactor.createLocation()
     }
     
     private func isValid(name: String) -> Bool {
         return name.characters.count > 2
     }
+}
+
+extension CreatorPresenter: CreatorInteractorOutput {
+    
 }

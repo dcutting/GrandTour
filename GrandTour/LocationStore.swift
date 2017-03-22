@@ -4,7 +4,17 @@ import Foundation
 
 class LocationStore {
     
-    func loadLocations(completion: @escaping ([MapLocation]) -> Void) {
+    var locations: [MapLocation]?
+    
+    func fetchLocations(completion: @escaping ([MapLocation]) -> Void) {
+        if let locations = locations {
+            completion(locations)
+        } else {
+            loadLocations(completion: completion)
+        }
+    }
+    
+    private func loadLocations(completion: @escaping ([MapLocation]) -> Void) {
         guard let url = Bundle.main.url(forResource: "landmarks", withExtension: "json") else {
             completion([])
             return
@@ -55,5 +65,10 @@ class LocationStore {
     
     fileprivate func makeLocation(name: String, coordinate: MapCoordinate) -> MapLocation {
         return MapLocation(name: name, coordinate: coordinate)
+    }
+    
+    func createLocation(named name: String, coordinate: MapCoordinate) {
+        let location = makeLocation(name: name, coordinate: coordinate)
+        
     }
 }

@@ -10,14 +10,20 @@ protocol MapInterface: class {
 class MapPresenter {
     
     let interactor: MapInteractor
+    weak var router: MapRouter?
     weak var interface: MapInterface?
     
-    init(interactor: MapInteractor) {
+    init(interactor: MapInteractor, router: MapRouter) {
         self.interactor = interactor
+        self.router = router
     }
     
     func refresh() {
         interactor.fetchLocations()
+    }
+    
+    func createLocation() {
+        router?.presentCreator()
     }
 }
 
