@@ -36,7 +36,11 @@ class CreatorViewController: UIViewController {
 
 extension CreatorViewController: CreatorInterface {
     
-    func setDoneButton(isEnabled: Bool) {
-        doneButton.isEnabled = isEnabled
+    func enableDoneButton() {
+        doneButton.isEnabled = true
+    }
+
+    func disableDoneButton() {
+        doneButton.isEnabled = false
     }
 }

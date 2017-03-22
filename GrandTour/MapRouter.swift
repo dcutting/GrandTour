@@ -12,15 +12,17 @@ class MapRouter {
     
     init(mapViewController: MapViewController) {
         self.viewController = mapViewController
+        wire()
     }
     
     func wire() {
         let interactor = MapInteractor(locationStore: locationStore)
         let presenter = MapPresenter(interactor: interactor, router: self)
-        creatorModuleDelegate = presenter
         viewController.presenter = presenter
         interactor.output = presenter
         presenter.interface = viewController
+
+        creatorModuleDelegate = presenter
     }
     
     func presentCreator(for coordinate: MapCoordinate) {

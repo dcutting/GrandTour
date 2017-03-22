@@ -3,7 +3,7 @@
 import Foundation
 
 protocol MapInteractorOutput: class {
-    func didFetchLocations(_ locations: [MapLocation])
+    func fetchedLocations(_ locations: [MapLocation])
     func setStartingLocation(_ location: MapLocation)
 }
 
@@ -16,7 +16,7 @@ class MapInteractor {
         self.locationStore = locationStore
     }
 
-    func startTour() {
+    func start() {
         fetchAndOutputLocations() { [weak self] locations in
             if let first = locations.first {
                 self?.output?.setStartingLocation(first)
@@ -30,7 +30,7 @@ class MapInteractor {
     
     private func fetchAndOutputLocations(completion: (([MapLocation]) -> Void)? = nil) {
         locationStore.fetchLocations { [weak self] locations in
-            self?.output?.didFetchLocations(locations)
+            self?.output?.fetchedLocations(locations)
             completion?(locations)
         }
     }

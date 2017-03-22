@@ -12,14 +12,11 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         presenter.start()
     }
-}
 
-extension MapViewController {
-
-    @IBAction func didTapCreateLocation(_ sender: Any) {
+    @IBAction func tappedCreate(_ sender: Any) {
         let center = mapView.centerCoordinate
         let coordinate = MapCoordinate(latitude: center.latitude, longitude: center.longitude)
-        presenter.createLocation(for: coordinate)
+        presenter.tappedCreate(withCoordinate: coordinate)
     }
 }
 

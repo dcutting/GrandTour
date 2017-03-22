@@ -11,7 +11,6 @@ import UIKit
         
         let mapViewController = window!.rootViewController! as! MapViewController
         mapRouter = MapRouter(mapViewController: mapViewController)
-        mapRouter?.wire()
         
         return true
     }

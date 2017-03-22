@@ -39,7 +39,7 @@ class CreatorRouter {
         viewController.presenter = presenter
         interactor.output = presenter
         presenter.interface = viewController
-        presenter.delegate = creatorModuleDelegate
+        presenter.moduleDelegate = creatorModuleDelegate
     }
     
     func dismissCreator() {

@@ -3,11 +3,12 @@
 import Foundation
 
 protocol CreatorInterface: class {
-    func setDoneButton(isEnabled: Bool)
+    func enableDoneButton()
+    func disableDoneButton()
 }
 
 protocol CreatorModuleDelegate: class {
-    func didCreateLocation()
+    func createdLocation()
 }
 
 class CreatorPresenter {
@@ -15,7 +16,7 @@ class CreatorPresenter {
     let interactor: CreatorInteractor
     weak var router: CreatorRouter?
     weak var interface: CreatorInterface?
-    weak var delegate: CreatorModuleDelegate?
+    weak var moduleDelegate: CreatorModuleDelegate?
     
     init(interactor: CreatorInteractor, router: CreatorRouter) {
         self.interactor = interactor
@@ -37,12 +38,16 @@ class CreatorPresenter {
 
 extension CreatorPresenter: CreatorInteractorOutput {
     
-    func setCanCreate(isEnabled: Bool) {
-        interface?.setDoneButton(isEnabled: isEnabled)
+    func canCreateLocation() {
+        interface?.enableDoneButton()
+    }
+    
+    func cannotCreateLocation() {
+        interface?.disableDoneButton()
     }
     
     func createdLocation() {
-        delegate?.didCreateLocation()
+        moduleDelegate?.createdLocation()
         router?.dismissCreator()
     }
 }

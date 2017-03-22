@@ -3,7 +3,8 @@
 import Foundation
 
 protocol CreatorInteractorOutput: class {
-    func setCanCreate(isEnabled: Bool)
+    func canCreateLocation()
+    func cannotCreateLocation()
     func createdLocation()
 }
 
@@ -19,16 +20,19 @@ class CreatorInteractor {
     }
     
     func updateName(_ name: String) {
-        let valid = isValid(name: name)
-        output?.setCanCreate(isEnabled: valid)
+        if isValid(name: name) {
+            output?.canCreateLocation()
+        } else {
+            output?.cannotCreateLocation()
+        }
+    }
+    
+    private func isValid(name: String) -> Bool {
+        return name.characters.count > 2
     }
     
     func createLocation(named name: String) {
         locationStore.createLocation(named: name, coordinate: coordinate)
         output?.createdLocation()
-    }
-    
-    private func isValid(name: String) -> Bool {
-        return name.characters.count > 2
     }
 }
