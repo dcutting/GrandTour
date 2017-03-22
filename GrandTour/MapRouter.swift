@@ -15,13 +15,12 @@ class MapRouter {
         let interactor = MapInteractor(locationStore: locationStore)
         let presenter = MapPresenter(interactor: interactor, router: self)
         viewController.presenter = presenter
-
         interactor.output = presenter
         presenter.interface = viewController
     }
     
     func presentCreator() {
         let creatorRouter = CreatorRouter(locationStore: locationStore)
-        creatorRouter.presentCreatorInterface(from: viewController)
+        creatorRouter.presentCreator(from: viewController)
     }
 }

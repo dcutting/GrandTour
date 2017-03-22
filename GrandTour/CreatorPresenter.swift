@@ -17,11 +17,11 @@ class CreatorPresenter {
         self.router = router
     }
     
-    func updateName(_ name: String) {
+    func updatedName(_ name: String) {
         interactor.updateName(name)
     }
     
-    func createLocation() {
+    func tappedDone() {
         interactor.createLocation()
     }
     

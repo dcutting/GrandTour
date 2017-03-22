@@ -15,17 +15,17 @@ class CreatorViewController: UIViewController {
         updateName()
     }
     
+    @objc private func textChanged() {
+        updateName()
+    }
+    
     func updateName() {
         let text = nameTextField.text ?? ""
-        presenter.updateName(text)
+        presenter.updatedName(text)
     }
 
     @IBAction func tappedDone(_ sender: Any) {
-        presenter.createLocation()
-    }
-    
-    @objc private func textChanged() {
-        updateName()
+        presenter.tappedDone()
     }
 }
 
