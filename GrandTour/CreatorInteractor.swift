@@ -19,19 +19,15 @@ class CreatorInteractor {
         self.coordinate = coordinate
     }
     
-    func validate(name: String) {
-        if isValid(name: name) {
+    func validate(name: MapName) {
+        if name.isValid() {
             output?.canCreateLocation()
         } else {
             output?.cannotCreateLocation()
         }
     }
     
-    private func isValid(name: String) -> Bool {
-        return name.characters.count > 2
-    }
-    
-    func createLocation(named name: String) {
+    func createLocation(named name: MapName) {
         locationStore.createLocation(named: name, coordinate: coordinate)
         output?.createdLocation()
     }

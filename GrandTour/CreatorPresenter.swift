@@ -24,11 +24,13 @@ class CreatorPresenter {
     }
     
     func updatedName(_ name: String) {
-        interactor.validate(name: name)
+        let mapName = MapName(value: name)
+        interactor.validate(name: mapName)
     }
     
     func tappedDone(withName name: String) {
-        interactor.createLocation(named: name)
+        let mapName = MapName(value: name)
+        interactor.createLocation(named: mapName)
     }
 }
 

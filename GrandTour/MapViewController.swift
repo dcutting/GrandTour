@@ -57,7 +57,7 @@ extension MapViewController {
     
     fileprivate func makeAnnotation(from location: MapLocation) -> MKAnnotation {
         let annotation = MKPointAnnotation()
-        annotation.title = location.name
+        annotation.title = location.name.value
         annotation.coordinate = makeLocationCoordinate2D(from: location.coordinate)
         return annotation
     }

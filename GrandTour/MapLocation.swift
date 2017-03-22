@@ -3,6 +3,6 @@
 import Foundation
 
 struct MapLocation {
-    let name: String
+    let name: MapName
     let coordinate: MapCoordinate
 }
