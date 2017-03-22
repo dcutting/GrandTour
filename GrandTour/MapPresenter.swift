@@ -18,6 +18,10 @@ class MapPresenter {
         self.router = router
     }
     
+    func start() {
+        interactor.startTour()
+    }
+    
     func refresh() {
         interactor.fetchLocations()
     }

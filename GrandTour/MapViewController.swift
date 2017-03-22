@@ -10,7 +10,7 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.refresh()
+        presenter.start()
     }
 }
 

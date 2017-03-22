@@ -16,16 +16,22 @@ class MapInteractor {
         self.locationStore = locationStore
     }
 
-    func fetchLocations() {
-        locationStore.fetchLocations { [weak self] locations in
-            self?.processFetchedLocations(locations)
+    func startTour() {
+        fetchAndOutputLocations() { [weak self] locations in
+            if let first = locations.first {
+                self?.output?.setStartingLocation(first)
+            }
         }
     }
     
-    private func processFetchedLocations(_ locations: [MapLocation]) {
-        output?.didFetchLocations(locations)
-        if let first = locations.first {
-            output?.setStartingLocation(first)
+    func fetchLocations() {
+        fetchAndOutputLocations()
+    }
+    
+    private func fetchAndOutputLocations(completion: (([MapLocation]) -> Void)? = nil) {
+        locationStore.fetchLocations { [weak self] locations in
+            self?.output?.didFetchLocations(locations)
+            completion?(locations)
         }
     }
 }
