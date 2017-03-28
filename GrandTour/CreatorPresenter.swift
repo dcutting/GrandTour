@@ -3,7 +3,8 @@
 import Foundation
 
 protocol CreatorPresentableView: class {
-    func setCanCreate(isEnabled: Bool)
+    func canCreateLocation()
+    func cannotCreateLocation()
     func createLocation(named: String)
 }
 
@@ -15,8 +16,11 @@ class CreatorPresenter {
     
     func updateName(_ name: String) {
         newLocationName = name
-        let valid = isValid(name: newLocationName)
-        presentableView?.setCanCreate(isEnabled: valid)
+        if isValid(name: newLocationName) {
+            presentableView?.canCreateLocation()
+        } else {
+            presentableView?.cannotCreateLocation()
+        }
     }
     
     func createLocation() {

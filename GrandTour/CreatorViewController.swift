@@ -38,8 +38,12 @@ class CreatorViewController: UIViewController {
 
 extension CreatorViewController: CreatorPresentableView {
     
-    func setCanCreate(isEnabled: Bool) {
-        doneButton.isEnabled = isEnabled
+    func canCreateLocation() {
+        doneButton.isEnabled = true
+    }
+    
+    func cannotCreateLocation() {
+        doneButton.isEnabled = false
     }
     
     func createLocation(named name: String) {
